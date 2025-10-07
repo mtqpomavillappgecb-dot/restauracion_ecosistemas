@@ -1,0 +1,152 @@
+---
+title: "Projeto de Restauracion de Ecosistemas TESTE"
+author: "Toa Quindi"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: true # Ativa o sumário (Table of Contents)
+    toc_depth: 3 # Define até qual nível de cabeçalho o sumário deve ir (e.g., ###)
+    number_sections: true # Ativa a numeração automática das seções (e.g., 1, 1.1, 1.1.1)
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+  word_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+## message e warning desligado nos chunks
+```
+
+# Introdución
+
+Proyecto desarrollado para el modulo Fluxo de trabalho reproductivel em R, dictado por el professor Diogo Rocha y Hernani Ramos aplicado a un contexto de restauracion de ecosistema en la region sierra sur de Ecuador.
+
+## Objetivo general
+
+Criar uma estructura de trabalho de base para pesquisa de restauraçao de ecossitemas aplicado en la áreas protegidas de la sierra sur de Equador.
+ 
+### Objetivos especificos
+
+Elaborar con calma.
+
+## Tarefas do trabalho
+
+- Criar repositorio em Github (ok)
+- Criar planilha con dados simulados (excel) (ok)
+- Criar planilha con dados simulados (Google sheets) (ok)
+- Criar dados históticos simulados del año 2000 (  )
+- Conectar la planilha de datos con Github (ok)
+- Conectar repositorio e planilha com Rstudio (ok)
+- Criar relatorio Rmarkdown (ok) 
+- Checar impressao de relatorio em html (ok)
+- Instalar MacTeX on macOS - https://tug.org/mactex/ (  )
+- Checar impressao de relatorio em pdf (  )
+- Checar impressao de relatorio em word (ok)
+- Fazer sumario estadistico de dados (ok)
+- Organizar scripts (  )
+> Criar um mapa de area de estudo pacote Terra
+> Criar tabelas
+> Criar graficos como pacote ggpplot2
+
+## Instalacion de pacotes
+- instalar MacTex
+```{r pacotes}
+# instalacion y abrir pacotes
+# install.packages(terra)
+# install.packages(ggplot2)
+# install.packages(dplyr)
+# tinytex::install_tinytex() #Para windows 
+# install.packages(MacTex) #Para mac instalar
+library(terra)
+library(ggplot2)
+library(dplyr)
+```
+
+## Conectar repositorio de dados 
+
+<url reposistorio de disclipina>
+<url reposistorio do projeto>
+<url planilha>
+
+```{r conexion}
+## scrip para conexion con repositorio de dados
+```
+
+## Sumario estadistico
+
+```{r summario}
+#script para visualizacion de dados
+#summary(datos)
+```
+
+## Area de estudo 
+- Fazer figura 1 com mapa de Equador
+- Considerar pacote Terra, GGMAP, GGPLOT2
+- Incluir Norte, escala, Shp de pais, region y 2 areas de estudio
+
+```{r mapa1}
+# script para crear mapa com Terra 
+# escala nacional
+```
+
+- Fazer figura 2 com mapa regional, cambiar escala
+- Considerar pacote Terra, GGMAP, GGPLOT2
+- Incluir Norte, escala, Shp de region, provincias y 2 areas de estudio
+- Incluir os 2 grids (100 x 100 m)
+- Incluir coordenadas dos centroides de los grids
+
+```{r mapa2}
+# script para crear mapa com Terra
+# escala regional
+```
+
+#Extraer coordenadas
+-Extraer coordenadas limites max, min de cada area
+
+```{r limites}
+#extraer coordenadas limites
+```
+
+-Extraer coordenadas centroides
+
+```{r centroides}
+#generar coodenadas de centroides
+```
+
+## Tabelas
+
+```{r tabelas}
+# elabora scripts para tabelas
+```
+
+## Analisis
+
+```{r analisis}
+#elaborar scripts
+```
+
+## Graficos
+
+```{r graficos}
+#elaborar scripts para graficos com ggplot2
+#elaborar boxplot com ggplot entre ano e cantidades de arbustos
+#Agrupar graficos temporales de las areas sin y con manejo
+#Criar mapas con serie histórica de evolucion desde el 2000 hasta 20 años de monitoreo de restauración.
+```
+
+## Tarefas pendientes
+
+- Definir coorientadores para teses (1 o 2)
+- Contactar con colaboradores de Ecuador URG!!
+- Elaborar planes de accion dependiendo del score
+
+
+
+
+
