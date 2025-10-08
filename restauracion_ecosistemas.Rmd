@@ -40,7 +40,7 @@ Elaborar con calma.
 - Criar repositorio em Github (ok)
 - Criar planilha con dados simulados (excel) (ok)
 - Criar planilha con dados simulados (Google sheets) (ok)
-- Criar dados históticos simulados del año 2000 (  )
+- Criar dados históticos simulados del año 2000 (ok)
 - Conectar la planilha de datos con Github (ok)
 - Conectar repositorio e planilha com Rstudio (ok)
 - Criar relatorio Rmarkdown (ok) 
@@ -55,7 +55,7 @@ Elaborar con calma.
 > Criar graficos como pacote ggpplot2
 
 ## Instalacion de pacotes
-- instalar MacTex
+
 ```{r pacotes}
 # instalacion y abrir pacotes
 # install.packages(terra)
@@ -63,9 +63,12 @@ Elaborar con calma.
 # install.packages(dplyr)
 # tinytex::install_tinytex() #Para windows 
 # install.packages(MacTex) #Para mac instalar
+# install.packages("readxl")
 library(terra)
 library(ggplot2)
 library(dplyr)
+library(readr) 
+library(readxl)
 ```
 
 ## Conectar repositorio de dados 
@@ -75,7 +78,12 @@ library(dplyr)
 <url planilha>
 
 ```{r conexion}
-## scrip para conexion con repositorio de dados
+## script para conexion con repositorio de dados
+
+p_csv <- read_csv2(file.choose())
+df <- data.frame(p_csv)
+View(p_csv)
+
 ```
 
 ## Sumario estadistico
@@ -83,6 +91,8 @@ library(dplyr)
 ```{r summario}
 #script para visualizacion de dados
 #summary(datos)
+
+
 ```
 
 ## Area de estudo 
@@ -93,6 +103,7 @@ library(dplyr)
 ```{r mapa1}
 # script para crear mapa com Terra 
 # escala nacional
+
 ```
 
 - Fazer figura 2 com mapa regional, cambiar escala
@@ -104,6 +115,10 @@ library(dplyr)
 ```{r mapa2}
 # script para crear mapa com Terra
 # escala regional
+vectorData1 <- vect(file.choose()) 
+plot(vectorData1)
+vectorData2 <- vect(file.choose()) 
+plot(vectorData2)
 ```
 
 #Extraer coordenadas
@@ -138,6 +153,9 @@ library(dplyr)
 #elaborar boxplot com ggplot entre ano e cantidades de arbustos
 #Agrupar graficos temporales de las areas sin y con manejo
 #Criar mapas con serie histórica de evolucion desde el 2000 hasta 20 años de monitoreo de restauración.
+
+
+
 ```
 
 ## Tarefas pendientes
