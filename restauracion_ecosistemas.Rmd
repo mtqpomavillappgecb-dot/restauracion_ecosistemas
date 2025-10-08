@@ -68,6 +68,11 @@ library(terra)
 library(ggplot2)
 library(dplyr)
 library(readr) 
+library("googlesheets4") #código que abre o pacote.
+library("dplyr")
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata) # Datos necesarios para rnaturalearth
 
 ```
 
@@ -81,22 +86,20 @@ planilha <https://docs.google.com/spreadsheets/d/1_pp_YBuU1xgU2OD62DSHViigh90yhG
 ## script para conexion con repositorio de dados
 
 #O código echo=FALSE oculta o script no R Markdown.
-
 #install.packages("googlesheets4") 
 #desabilite o código após instalação.
-library("googlesheets4") #código que abre o pacote.
-library("dplyr")
+
 gs4_deauth() #código que permite a conecxão sem autenticação.
 
 url_dados <- "https://docs.google.com/spreadsheets/d/1_pp_YBuU1xgU2OD62DSHViigh90yhGJR2DeAujrFY3A/edit?usp=sharing" 
 #código que conecta a sua planilha do Google Drive. 
 
 # Se o nome da aba for realmente 'planilha1', mantenha como está
-dados <- read_sheet(url_dados, sheet = "datos") # nomear planilha caso hajam varias
+datos <- read_sheet(url_dados, sheet = "datos") # nomear planilha caso hajam varias
 #dados2 <- read_sheet(url_planilha, sheet = "planilha2") # caso haja uma 2a planilha
 #dados3 <- read_sheet(url_planilha, sheet = "planilha3") # caso haja uma 3a planilha
 
-tibble(dados) # avalia natureza das variáveis e dados
+tibble(datos) # avalia natureza das variáveis e dados
 #tibble(dados1) # avaliar dados da segunda planilha
 #tibble(dados2) # avaliar dados da terceira planilha
 ```
@@ -107,7 +110,9 @@ tibble(dados) # avalia natureza das variáveis e dados
 ```{r summario}
 #script para visualizacion de dados
 #summary(datos)
-
+head(datos)
+summary(datos)
+plot(datos$long, datos$lat)
 
 ```
 
@@ -119,6 +124,19 @@ tibble(dados) # avalia natureza das variáveis e dados
 ```{r mapa1}
 # script para crear mapa com Terra 
 # escala nacional
+
+# Obtener los datos de los países del mundo
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Filtrar por el país deseado
+ecuador <- subset(world, sovereignt == "Ecuador")
+
+# Dibujar el mapa 
+ggplot(data = ecuador) +
+  geom_sf() +
+  geom_point()
+  labs(title = "Mapa de Ecuador") 
+  
 
 ```
 
@@ -138,6 +156,20 @@ tibble(dados) # avalia natureza das variáveis e dados
 
 ```{r limites}
 #extraer coordenadas limites
+# Supondo que 'area' seja um objeto sf com uma coluna chamada 'nome' ou 'id'
+# contendo as áreas "x" e "Y"
+
+# Filtrar as duas áreas
+#area_x <- area[area$nome == "x", ]
+#area_y <- area[area$nome == "y", ]
+
+# Extrair os limites (bounding box)
+#bbox_x <- st_bbox(area_x)
+#bbox_y <- st_bbox(area_y)
+
+# Mostrar os limites
+#bbox_x
+#bbox_y
 ```
 
 -Extraer coordenadas centroides
