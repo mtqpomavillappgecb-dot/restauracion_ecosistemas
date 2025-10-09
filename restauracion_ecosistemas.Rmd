@@ -33,7 +33,9 @@ Criar uma estructura de trabalho de base para pesquisa de restauraçao de ecossi
  
 ## Objetivos especificos
 
-Elaborar con calma.
+Definir las áreas de estudio
+Definira las variables para el análisis de la variación
+Analizar la variación de cada área desde el año 2000 hasta el año 2045
 
 # Tarefas do trabalho
 
@@ -108,7 +110,7 @@ tibble(datos) # avalia natureza das variáveis e dados
 #tibble(dados2) # avaliar dados da terceira planilha
 ```
 
-## Sumario estadístico
+### Sumario estadístico
 
 ```{r summario}
 summary(datos)
@@ -174,7 +176,7 @@ ggplot() +
  
 ```
 
-###Extracción de coordenadas máx y min
+### Extracción de coordenadas máx y min
 
 ```{r limites}
 bbox <- st_bbox(shp2)
@@ -182,7 +184,7 @@ print(bbox)
 
 ```
 
-###Extracción de centroides
+### Extracción de centroides
 
 ```{r centroides}
 centroides <- st_centroid(shp2)  #Generar coodenadas de centroides  
@@ -212,7 +214,7 @@ head(st_drop_geometry(shp2_m))
 
 ```
 
-## Analisis
+## Análisis
 
 ```{r analisis}
 #Tablas de cvs
@@ -227,7 +229,7 @@ head(datos_res, 40)
 
 ```
 
-## Graficos
+## Gráficos
 
 ```{r graficos}
 #Criar mapas con serie histórica de evolucion desde el 2000 hasta 20 años de monitoreo de restauración.
