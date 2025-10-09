@@ -115,7 +115,6 @@ tibble(datos) # avalia natureza das variáveis e dados
 #script para visualizacion de dados
 #summary(datos)
 head(datos)
-summary(datos)
 plot(datos$long, datos$lat)
 
 ```
@@ -195,18 +194,51 @@ print(bbox)
 
 ```{r centroides}
 #generar coodenadas de centroides
+centroides <- st_centroid(shp2)
+# Para todos los centroides
+coordenadas_xy <- st_coordinates(centroides)
+print(coordenadas_xy)
+
 ```
 
 ## Tabelas
 
 ```{r tabelas}
 # elabora scripts para tabelas
+
+# Ver las primeras filas de la tabla (como un data.frame)
+head(st_drop_geometry(shp2))
+# Convertir la tabla a un data.frame sin geometría
+tabla <- st_drop_geometry(shp2)
+# Guardar como CSV
+write.csv(tabla, "tabla_shapefile.csv", row.names = FALSE)
+
 ```
 
 ## Analisis
 
 ```{r analisis}
 #elaborar scripts
+#proyección de datos
+st_crs(shp2)
+# Reproyectar a UTM adecuado (ajustar el EPSG según la zona)
+shp2_m <- st_transform(shp2, 32717)
+shp2_m$area_m2 <- st_area(shp2_m)
+shp2_m$area_km2 <- as.numeric(shp2_m$area_m2) / 1e6
+# Ver las primeras filas con el área
+head(st_drop_geometry(shp2_m))
+
+#tablas de cvs
+datos <- read_sheet(url_dados, sheet = "datos")
+
+# Ver filas y columnas específicas
+datos_res <- datos|>
+  filter(area == "Reserva1") |>
+  select(2, 3, 4, 7, 9)
+head(datos_res, 40)
+
+summary(datos)
+
 ```
 
 ## Graficos
