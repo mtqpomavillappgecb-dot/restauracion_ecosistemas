@@ -3,19 +3,19 @@ title: "Projeto de Restauracion de Ecosistemas TESTE"
 author: "Toa Quindi"
 date: "`r Sys.Date()`"
 output:
+  word_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true    
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
   html_document:
     df_print: paged
     toc: true # Ativa o sumário (Table of Contents)
     toc_depth: 3 # Define até qual nível de cabeçalho o sumário deve ir (e.g., ###)
     number_sections: true # Ativa a numeração automática das seções (e.g., 1, 1.1, 1.1.1)
-  pdf_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true
-  word_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true    
 ---
 
 ```{r setup, include=FALSE}
@@ -27,15 +27,15 @@ knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
 
 Proyecto desarrollado para el modulo Fluxo de trabalho reproductivel em R, dictado por el professor Diogo Rocha y Hernani Ramos aplicado a un contexto de restauracion de ecosistema en la region sierra sur de Ecuador.
 
-## Objetivo general
+# Objetivo general
 
 Criar uma estructura de trabalho de base para pesquisa de restauraçao de ecossitemas aplicado en la áreas protegidas de la sierra sur de Equador.
  
-### Objetivos especificos
+## Objetivos especificos
 
 Elaborar con calma.
 
-## Tarefas do trabalho
+# Tarefas do trabalho
 
 - Criar repositorio em Github (ok)
 - Criar planilha con dados simulados (excel) (ok)
@@ -54,7 +54,7 @@ Elaborar con calma.
 > Criar tabelas
 > Criar graficos como pacote ggpplot2
 
-## Instalacion de pacotes
+# Pacotes
 
 ```{r pacotes}
 # instalacion y abrir pacotes
@@ -108,7 +108,6 @@ tibble(datos) # avalia natureza das variáveis e dados
 #tibble(dados2) # avaliar dados da terceira planilha
 ```
 
-
 ## Sumario estadistico
 
 ```{r summario}
@@ -146,7 +145,7 @@ ggplot(data = ecuador) +
   geom_sf(data = datos_sf, color = "red", size = 2) +        # pontos
   geom_sf(data = linha_sf, color = "blue", size = 0.1) +       # linha conectando
   labs(
-    title = "Mapa de Ecuador com pontos e conexões",
+    title = "Mapa de Ecuador",
     subtitle = "Dados provenientes da planilha",
     x = "Longitud", y = "Latitud"
   ) +
@@ -213,12 +212,6 @@ tabla <- st_drop_geometry(shp2)
 # Guardar como CSV
 write.csv(tabla, "tabla_shapefile.csv", row.names = FALSE)
 
-```
-
-## Analisis
-
-```{r analisis}
-#elaborar scripts
 #proyección de datos
 st_crs(shp2)
 # Reproyectar a UTM adecuado (ajustar el EPSG según la zona)
@@ -227,6 +220,12 @@ shp2_m$area_m2 <- st_area(shp2_m)
 shp2_m$area_km2 <- as.numeric(shp2_m$area_m2) / 1e6
 # Ver las primeras filas con el área
 head(st_drop_geometry(shp2_m))
+
+```
+
+## Analisis
+
+```{r analisis}
 
 #tablas de cvs
 datos <- read_sheet(url_dados, sheet = "datos")
@@ -248,16 +247,33 @@ summary(datos)
 #elaborar boxplot com ggplot entre ano e cantidades de arbustos
 #Agrupar graficos temporales de las areas sin y con manejo
 #Criar mapas con serie histórica de evolucion desde el 2000 hasta 20 años de monitoreo de restauración.
+datos <- read_sheet(url_dados, sheet = "datos")
 
+ggplot(datos, aes(x = ano, y = score_yes_n, color = area)) +
+  geom_smooth(se = FALSE, size = 1.2, method = "loess") +
+  facet_wrap(~ ecosistema) +
+  labs(
+    title = "Tendencia por año con restauración",
+    x = "Año",
+    y = "Score",
+    color = "Área"
+  ) +
+  theme_minimal(base_size = 14)
 
+ggplot(datos, aes(x = ano, y = score_no_n, color = area)) +
+  geom_smooth(se = FALSE, size = 1.2, method = "loess") +
+  facet_wrap(~ ecosistema) +
+  labs(
+    title = "Tendencia por año sin restauración",
+    x = "Año",
+    y = "Score",
+    color = "Área"
+  ) +
+  theme_minimal(base_size = 14)
 
 ```
 
-## Tarefas pendientes
 
-- Definir coorientadores para teses (1 o 2)
-- Contactar con colaboradores de Ecuador URG!!
-- Elaborar planes de accion dependiendo del score
 
 
 
