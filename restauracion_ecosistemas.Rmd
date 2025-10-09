@@ -64,12 +64,12 @@ Elaborar con calma.
 # tinytex::install_tinytex() #Para windows 
 # install.packages(MacTex) #Para mac instalar
 # install.packages("readxl")
+# install.packages("sf")
 library(terra)
 library(ggplot2)
 library(dplyr)
 library(readr) 
 library("googlesheets4") #código que abre o pacote.
-library("dplyr")
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata) # Datos necesarios para rnaturalearth
@@ -132,11 +132,22 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 ecuador <- subset(world, sovereignt == "Ecuador")
 
 # Dibujar el mapa 
+datos_sf <- st_as_sf(datos, coords = c("long", "lat"), crs = 4326)  # WGS84
+
+linha_sf <- datos_sf %>%
+  summarize(do_union = FALSE) %>% 
+  st_cast("LINESTRING")
+
 ggplot(data = ecuador) +
-  geom_sf() +
-  geom_point()
-  labs(title = "Mapa de Ecuador") 
-  
+  geom_sf(fill = "antiquewhite", color = "gray60") +
+  geom_sf(data = datos_sf, color = "red", size = 2) +        # pontos
+  geom_sf(data = linha_sf, color = "blue", size = 0.1) +       # linha conectando
+  labs(
+    title = "Mapa de Ecuador com pontos e conexões",
+    subtitle = "Dados provenientes da planilha",
+    x = "Longitud", y = "Latitud"
+  ) +
+  theme_minimal()
 
 ```
 
@@ -149,7 +160,25 @@ ggplot(data = ecuador) +
 ```{r mapa2}
 # script para crear mapa com Terra
 # escala regional
+getwd()
+ruta_archivo <- setwd("/Users/pacha_cutig/Documents/Fluxo_trabalho_reproductivel_R/T_final/restauracion_ecosistemas")
+shp1 <- st_read("Shp/Limite_prov_2019_est.shp")
+shp2 <- st_read("Shp/SNAP_areas_est.shp")
+
+datos_sf <- st_as_sf(datos, coords = c("long", "lat"), crs = 4326) 
+
+ggplot() +
+  geom_sf(data = shp1, aes(fill = "Provincia del Azuay")) +
+  geom_sf(data = shp2, aes(fill = "Áreas de estudio_SNAP")) +
+  scale_fill_manual(values = c("Provincia del Azuay" = "lightblue", "Áreas de estudio_SNAP" = "red")) +
+  labs(title = "Mapa de áreas de estudio",
+       x = "Longitud",
+       y = "Latitud") +
+  theme_minimal() # Aplica un tema más limpio
+
+
 ```
+
 
 #Extraer coordenadas
 -Extraer coordenadas limites max, min de cada area
