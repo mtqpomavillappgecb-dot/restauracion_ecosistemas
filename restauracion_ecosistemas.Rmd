@@ -63,16 +63,20 @@ Elaborar con calma.
 # install.packages(dplyr)
 # tinytex::install_tinytex() #Para windows 
 # install.packages(MacTex) #Para mac instalar
-# install.packages("readxl")
+# install.packages(readxl)
 # install.packages("sf")
+# install.packages("ggspatial")
+# install.packages("ggsn")
+
 library(terra)
 library(ggplot2)
 library(dplyr)
 library(readr) 
-library("googlesheets4") #código que abre o pacote.
+library(googlesheets4) #código que abre o pacote.
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata) # Datos necesarios para rnaturalearth
+library(ggspatial)
 
 ```
 
@@ -175,30 +179,16 @@ ggplot() +
        x = "Longitud",
        y = "Latitud") +
   theme_minimal() # Aplica un tema más limpio
-
-
+ 
 ```
-
 
 #Extraer coordenadas
 -Extraer coordenadas limites max, min de cada area
 
 ```{r limites}
-#extraer coordenadas limites
-# Supondo que 'area' seja um objeto sf com uma coluna chamada 'nome' ou 'id'
-# contendo as áreas "x" e "Y"
+bbox <- st_bbox(shp2)
+print(bbox)
 
-# Filtrar as duas áreas
-#area_x <- area[area$nome == "x", ]
-#area_y <- area[area$nome == "y", ]
-
-# Extrair os limites (bounding box)
-#bbox_x <- st_bbox(area_x)
-#bbox_y <- st_bbox(area_y)
-
-# Mostrar os limites
-#bbox_x
-#bbox_y
 ```
 
 -Extraer coordenadas centroides
