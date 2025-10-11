@@ -48,13 +48,10 @@ Analizar la variación de cada área desde el año 2000 hasta el año 2045
 - Criar relatorio Rmarkdown (ok) 
 - Checar impressao de relatorio em html (ok)
 - Instalar MacTeX on macOS - https://tug.org/mactex/ (  )
-- Checar impressao de relatorio em pdf (  )
+- Checar impressao de relatorio em pdf (ok)
 - Checar impressao de relatorio em word (ok)
 - Fazer sumario estadistico de dados (ok)
-- Organizar scripts (  )
-> Criar um mapa de area de estudo pacote Terra
-> Criar tabelas
-> Criar graficos como pacote ggpplot2
+- Organizar scripts (ok)
 
 ## Pacotes
 
@@ -118,9 +115,6 @@ summary(datos)
 ```
 
 ## Area de estudo 
-- Fazer figura 1 com mapa de Equador
-- Considerar pacote Terra, GGMAP, GGPLOT2
-- Incluir Norte, escala, Shp de pais, region y 2 areas de estudio
 
 ```{r mapa1}
 #Escala nacional
@@ -149,12 +143,6 @@ ggplot(data = ecuador) +
   theme_minimal()
 
 ```
-
-- Fazer figura 2 com mapa regional, cambiar escala
-- Considerar pacote Terra, GGMAP, GGPLOT2
-- Incluir Norte, escala, Shp de region, provincias y 2 areas de estudio
-- Incluir os 2 grids (100 x 100 m)
-- Incluir coordenadas dos centroides de los grids
 
 ```{r mapa2}
 #Escala regional
