@@ -3,19 +3,19 @@ title: "Projeto de Restauracion de Ecosistemas TESTE"
 author: "Toa Quindi"
 date: "`r Sys.Date()`"
 output:
+  word_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true    
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
   html_document:
     df_print: paged
     toc: true # Ativa o sumário (Table of Contents)
     toc_depth: 3 # Define até qual nível de cabeçalho o sumário deve ir (e.g., ###)
     number_sections: true # Ativa a numeração automática das seções (e.g., 1, 1.1, 1.1.1)
-  pdf_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true
-  word_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true    
 ---
 
 ```{r setup, include=FALSE}
